@@ -5,7 +5,8 @@ import numpy as np
 import pandas as pd 
 
 
-app = Flask(__name__)
+application = Flask(__name__)
+app = application
 
 scaler = pickle.load(open("Model\standardScaler.pkl","rb"))
 model = pickle.load(open("Model\modelforprediction.pkl","rb"))
