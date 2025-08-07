@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; font-family:'Segoe UI', sans-serif; background: linear-gradient(to right, #3a7bd5, #00d2ff); color:white; height:100vh; display:flex; justify-content:center; align-items:center; text-align:center; animation:fadeIn 1s ease-in;">
+
+    <div style="background-color: rgba(255,255,255,0.1); padding:40px; border-radius:20px; box-shadow:0 8px 20px rgba(0,0,0,0.2); max-width:500px; width:90%; backdrop-filter: blur(6px);">
+        
+        {% if result == 'Diabetic' %}
+            <img src="https://cdn-icons-png.flaticon.com/512/3039/3039433.png" alt="Diabetic" style="width:100px; animation:pulse 1.5s infinite;">
+            <h1 style="margin-top:20px; font-size:28px;">⚠️ Health Alert</h1>
+            <p style="font-size:18px; margin-top:15px;">{{ result }}</p>
+        {% else %}
+            <img src="https://cdn-icons-png.flaticon.com/512/845/845646.png" alt="Healthy" style="width:100px; animation:spin 3s linear infinite;">
+            <h1 style="margin-top:20px; font-size:28px;">✅ Great News</h1>
+            <p style="font-size:18px; margin-top:15px;">{{ result }}</p>
+        {% endif %}
+
+        <a href="{{ url_for('index') }}" style="display:inline-block; margin-top:30px; padding:12px 24px; background:#00FFB2; color:#000; font-weight:bold; border-radius:10px; text-decoration:none; font-size:16px; transition:0.3s;">
+            🔁 Predict Again
+        </a>
+    </div>
+
+    <style>
+        @keyframes spin {
+            0% {transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: scale(0.95);}
+            to {opacity: 1; transform: scale(1);}
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 22px; }
+            p { font-size: 16px; }
+            img { width: 80px; }
+        }
+    </style>
+
+</body>
+</html>

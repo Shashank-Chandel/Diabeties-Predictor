@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Diabetes Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #ACB6E5);
+            margin: 0;
+            padding: 0;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            animation: slideIn 1s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            transition: box-shadow 0.3s;
+        }
+
+        input[type="number"]:focus {
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+            outline: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 14px;
+            font-size: 16px;
+            background: linear-gradient(to right, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.4s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            background: linear-gradient(to right, #43e97b, #38f9d7);
+        }
+
+        .result {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #222;
+            opacity: 0;
+            animation: fadeInResult 2s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes fadeInResult {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .guidelines {
+            margin-top: 30px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-left: 5px solid #4CAF50;
+            border-radius: 8px;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .guidelines h4 {
+            margin-top: 0;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 15px;
+                padding: 20px;
+            }
+
+            input[type="number"], button {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Diabetes Prediction</h2>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="POST">
+
+        <label for="Pregnancies">Pregnancies</label>
+        <input type="number" step="1" name="Pregnancies" required>
+
+        <label for="Glucose">Glucose Level (mg/dL)</label>
+        <input type="number" step="0.1" name="Glucose" required>
+
+        <label for="BloodPressure">Blood Pressure (mm Hg)</label>
+        <input type="number" step="0.1" name="BloodPressure" required>
+
+        <label for="SkinThickness">Skin Thickness (mm)</label>
+        <input type="number" step="0.1" name="SkinThickness" required>
+
+        <label for="Insulin">Insulin Level (mu U/mL)</label>
+        <input type="number" step="0.1" name="Insulin" required>
+
+        <label for="BMI">BMI (kg/m²)</label>
+        <input type="number" step="0.1" name="BMI" required>
+
+        <label for="DiabetesPedigreeFunction">Diabetes Pedigree Function</label>
+        <input type="number" step="0.01" name="DiabetesPedigreeFunction" required>
+
+        <label for="Age">Age</label>
+        <input type="number" step="1" name="Age" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+ 
+
+    <div class="guidelines">
+        <h4>How to Measure Inputs</h4>
+        <ul>
+            <li><strong>Pregnancies</strong>: Total number of times you've been pregnant.</li>
+            <li><strong>Glucose</strong>: Fasting glucose level via glucometer (mg/dL).</li>
+            <li><strong>Blood Pressure</strong>: Use a BP monitor, in a relaxed state (mm Hg).</li>
+            <li><strong>Skin Thickness</strong>: Triceps skinfold thickness (optional if unknown).</li>
+            <li><strong>Insulin</strong>: Fasting serum insulin level from lab (mu U/mL).</li>
+            <li><strong>BMI</strong>: Use BMI = weight(kg) / height(m)<sup>2</sup>.</li>
+            <li><strong>Diabetes Pedigree Function</strong>: Estimate family history effect (default: 0.5).</li>
+            <li><strong>Age</strong>: Enter your age in years.</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
